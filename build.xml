@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<project name="iumfs-daemon-core" default="dist" basedir=".">
+  <property name="src" value="./cmd/src"/>
+  <property name="build" value="./cmd/build/classes"/>
+  <property name="dist" value="./cmd/dist"/>
+  <target name="init">
+    <mkdir dir="cmd/dist"/>
+    <mkdir dir="cmd/build/classes"/>
+  </target>
+  <target name="dist" depends="compile">
+    <jar jarfile="${dist}/iumfs-daemon-core.jar" basedir="${build}" >
+      <include name="**/*.class"/>
+    </jar>
+  </target>
+  <target name="compile" depends="init">
+    <javac srcdir="${src}" destdir="${build}" debug="true" debuglevel="lines,vars,source" encoding="utf8" includeantruntime="no">
+    </javac>
+  </target>
+</project>
+
