@@ -137,7 +137,7 @@ abstract public class File extends java.io.File {
     @Override
     abstract public boolean isDirectory();
 
-    abstract public void create();
+    abstract public void create() throws IOException;
     
     @Override
     public boolean isFile() {
