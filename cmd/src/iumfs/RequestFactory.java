@@ -30,7 +30,7 @@ import java.util.logging.Logger;
  */
 public abstract class RequestFactory {
 
-    private static Logger logger = Logger.getLogger("iumfs");
+    protected static final Logger logger = Logger.getLogger("iumfs");
     
     protected RequestFactory(){};
 
