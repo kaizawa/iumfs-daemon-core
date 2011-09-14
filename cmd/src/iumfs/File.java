@@ -20,14 +20,12 @@ import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.net.URI;
-import java.net.URL;
 import java.nio.ByteBuffer;
 import java.util.Date;
 
 abstract public class File extends java.io.File {
     final public static int VREG = 1; // Normal File
     final public static int VDIR = 2; // Directory
-    private String base_path = null;
     protected long length = 0;
     private long atime; // Last access time (msec)
     private long ctime; // Modify time(csec)
@@ -216,18 +214,4 @@ abstract public class File extends java.io.File {
     public boolean setWritable(boolean writable, boolean ownerOnly) {throw new NotSupportedException();}
     @Override
     public URI toURI() {throw new NotSupportedException();}
-
-    /**
-     * @return the base_path
-     */
-    public String getBasePath() {
-        return base_path;
-    }
-
-    /**
-     * @param base_path the base_path to set
-     */
-    public void setBasePath(String base_path) {
-        this.base_path = base_path;
-    }
 }
