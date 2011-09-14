@@ -15,22 +15,28 @@
  */
 package iumfs;
 
+import java.io.FileFilter;
 import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
 import java.nio.ByteBuffer;
 import java.util.Date;
 
-abstract public class File {
+abstract public class File extends java.io.File {
     final public static int VREG = 1; // Normal File
     final public static int VDIR = 2; // Directory
-    private String name;
-    protected long file_size = 0;
+    private String base_path = null;
+    protected long length = 0;
     private long atime; // Last access time (msec)
     private long ctime; // Modify time(csec)
     private long mtime; // Modify time(msec)
+    protected boolean directory = false;
     
-    public File(String name){
-        this.name = name;
+    
+    public File(String path_name){
+        super(path_name);
         init();
     }
 
@@ -41,16 +47,13 @@ abstract public class File {
         setMtime(now.getTime());
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setFileSize(long file_size){
-        this.file_size = file_size;
+    public void setLength(long length){
+        this.length = length;
     }
     
-    public long getFileSize() {
-        return file_size;
+    @Override
+    public long length() {
+        return length;
     }
 
     /**
@@ -133,8 +136,98 @@ abstract public class File {
      * Check if this file represents directory.
      * @return 
      */
-    abstract public boolean isDir();
+    @Override
+    abstract public boolean isDirectory();
 
     abstract public void create();
+    
+    @Override
+    public boolean isFile() {
+        return ! isDirectory();
+    }    
+    
+    @Override
+    public boolean canExecute() {throw new NotSupportedException();}
+    
+    @Override
+    public boolean canRead(){throw new NotSupportedException();}
+ 
+    @Override
+    public boolean canWrite() {throw new NotSupportedException();}
+    
+    @Override
+    public boolean createNewFile() {throw new NotSupportedException();}
+    
+    public static File	createTempFile(String prefix, String suffix) {
+        throw new NotSupportedException();
+    }
+    public static File	createTempFile(String prefix, String suffix, File directory) {
+        throw new NotSupportedException();
+    }
+    @Override
+    public boolean delete() { throw new NotSupportedException();}
+    @Override
+    public void	deleteOnExit() {throw new NotSupportedException();}
+    @Override
+    public boolean exists(){ throw new NotSupportedException();}
+    @Override
+    public long getFreeSpace(){ throw new NotSupportedException();}
+    @Override
+    public long	getTotalSpace() {throw new NotSupportedException();}
+    @Override
+    public long	getUsableSpace() {throw new NotSupportedException();}
+    @Override
+    public boolean isAbsolute() {throw new NotSupportedException();}
+    @Override
+    public boolean isHidden() {throw new NotSupportedException();}
+    @Override
+    public long lastModified() {throw new NotSupportedException();}
+    @Override
+    public String[] list() {throw new NotSupportedException();}
+    @Override
+    public String[] list(FilenameFilter filter) {throw new NotSupportedException();}
+    @Override
+    public File[] listFiles()  {throw new NotSupportedException();}
+    @Override
+    public File[] listFiles(FileFilter filter) {throw new NotSupportedException();}
+    @Override
+    public File[] listFiles(FilenameFilter filter) {throw new NotSupportedException();}
+    public static File[] listRoots() {throw new NotSupportedException();}
+    @Override
+    public boolean mkdir() {throw new NotSupportedException();}
+    @Override
+    public boolean mkdirs() {throw new NotSupportedException();}
+    public boolean renameTo(File dest) {throw new NotSupportedException();}
+    @Override
+    public boolean setExecutable(boolean executable) {throw new NotSupportedException();}
+    @Override
+    public boolean setExecutable(boolean executable, boolean ownerOnly) {throw new NotSupportedException();}
+    @Override
+    public boolean setLastModified(long time) {throw new NotSupportedException();}
+    @Override
+    public boolean setReadable(boolean readable) {throw new NotSupportedException();}
+    @Override
+    public boolean setReadable(boolean readable, boolean ownerOnly) {throw new NotSupportedException();}
+    @Override
+    public boolean setReadOnly() {throw new NotSupportedException();}
+    @Override
+    public boolean setWritable(boolean writable) {throw new NotSupportedException();}
+    @Override
+    public boolean setWritable(boolean writable, boolean ownerOnly) {throw new NotSupportedException();}
+    @Override
+    public URI toURI() {throw new NotSupportedException();}
 
+    /**
+     * @return the base_path
+     */
+    public String getBasePath() {
+        return base_path;
+    }
+
+    /**
+     * @param base_path the base_path to set
+     */
+    public void setBasePath(String base_path) {
+        this.base_path = base_path;
+    }
 }

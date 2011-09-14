@@ -68,7 +68,7 @@ public abstract class GetAttrRequest extends Request {
          */
         Date now = new Date();
         wbbuf.putLong(file.getPermission());
-        wbbuf.putLong(file.getFileSize());
+        wbbuf.putLong(file.length());
         wbbuf.putLong(file.getFileType());
         if (file == null) {
             wbbuf.putLong(start_time / 1000);
@@ -86,7 +86,7 @@ public abstract class GetAttrRequest extends Request {
             wbbuf.putLong((file.getCtime() % 1000) * 1000);
         }
         logger.finer("filename=" + file.getName() + ", Permission="
-                + String.format("%1$o", file.getPermission()) + " ,FileSize=" + file.getFileSize()
+                + String.format("%1$o", file.getPermission()) + " ,FileSize=" + file.length()
                 + ", FileType=" + file.getFileType());
     }
 }
