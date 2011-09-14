@@ -88,6 +88,8 @@ public abstract class ControlDevicePollingThread extends Thread {
             } catch (FileNotFoundException ex) {
                 logger.finer(ex.getMessage());
                 req.setResponseHeader(Request.ENOENT, 0);
+            } catch (FileExistsException ex) {
+                req.setResponseHeader(Request.EEXIST, 0);
             } catch (IOException ex) {
                 logger.severe(ex.getMessage());
                 req.setResponseHeader(Request.EIO, 0);
