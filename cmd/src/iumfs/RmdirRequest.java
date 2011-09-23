@@ -24,6 +24,20 @@ public abstract class RmdirRequest extends Request {
      */
     @Override
     public void execute() {
-        throw new NotSupportedException();
+        IumfsFile file = getFile();
+
+        if(file.isDirectory() == false){
+            throw new NotADirectoryException();
+        }
+        
+        if (file.delete() == false) {
+            logger.fine("cannot remove " + getFullPath());
+            setResponseHeader(EIO, 0);
+            return;
+        }
+        /*
+         * Set response header
+         */
+        setResponseHeader(SUCCESS, 0);
     }
 }

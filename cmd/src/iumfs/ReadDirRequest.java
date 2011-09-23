@@ -15,6 +15,7 @@
  */
 package iumfs;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.Collection;
 
@@ -35,8 +36,15 @@ public abstract class ReadDirRequest extends Request {
          * set after we know actuall data size.
          */
         wbbuf.position(Request.RESPONSE_HEADER_SIZE);
+        
+        IumfsFile file = getFile();
 
-        for (File f : getFileList()) {
+        /*
+         * Note, File object here is just used to express file name.
+         * Do not call any method of this File object.
+         * It would causes unexpected results.
+         */
+        for (File f : file.listFiles()) {
             int namelen = f.getName().getBytes("UTF-8").length;
             namelen++; // null terminate。
 
@@ -66,6 +74,4 @@ public abstract class ReadDirRequest extends Request {
          */
         setResponseHeader(SUCCESS, wbbuf.position() - RESPONSE_HEADER_SIZE);
     }
-
-    abstract public Collection<File> getFileList();
 }

@@ -36,7 +36,7 @@ public abstract class ReadRequest extends Request {
 
         logger.fine("offset = " + offset + " size = " + size);
 
-        File file = getFile();
+        IumfsFile file = getFile();
         if (file == null) {
             setResponseHeader(ENOENT, 0);
             return;
@@ -57,5 +57,5 @@ public abstract class ReadRequest extends Request {
         return;
     }
 
-    abstract public File getFile();
+    abstract public IumfsFile getFile();
 }

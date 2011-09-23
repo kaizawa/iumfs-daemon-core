@@ -25,7 +25,18 @@ public abstract class RemoveRequest extends Request {
      */
     @Override
     public void execute() {
-        logger.finer("RemoveRequest called");
-        throw new NotSupportedException();
+        IumfsFile file = getFile();
+
+        if (file.delete() == false) {
+            logger.fine("cannot remove " + getFullPath());
+            throw new NotADirectoryException();
+        }
+        /*
+         * Set response header
+         */
+        setResponseHeader(SUCCESS, 0);
     }
+
+    @Override
+    abstract public IumfsFile getFile();
 }

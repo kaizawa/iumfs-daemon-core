@@ -17,5 +17,10 @@
     <javac srcdir="${src}" destdir="${build}" debug="true" debuglevel="lines,vars,source" encoding="utf8" includeantruntime="no">
     </javac>
   </target>
+ <target name="clear">
+    <delete>
+      <fileset dir="${build}" includes="**/*.class" />
+    </delete>
+  </target>
 </project>
 

@@ -15,15 +15,33 @@
  */
 package iumfs;
 
+import java.io.IOException;
+import java.util.Collection;
+
 /**
  * <p>MKDIR Reuqest class</p>
  */
-public abstract class MkdirRequest extends Request{
+public abstract class MkdirRequest extends Request {
+
     /**
-     * Create new Directory
+     * <p>Create directory.</p>
+     * 
      */
     @Override
-    public void execute() {
-        setResponseHeader(ENOTSUP, 0);        
+    public void execute() throws IOException {
+
+        IumfsFile file = getFile();
+
+        if (file.mkdir() != true){
+            logger.fine("cannot create directory " + getFullPath());
+            throw new IOException();
+        }
+        /*
+         * レスポンスヘッダをセット
+         */
+        setResponseHeader(SUCCESS, 0);
     }
+
+    @Override
+    abstract public IumfsFile getFile();
 }

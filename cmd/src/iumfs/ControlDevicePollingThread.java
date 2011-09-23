@@ -32,7 +32,7 @@ import java.util.logging.Logger;
 public abstract class ControlDevicePollingThread extends Thread {
 
     protected static Logger logger = Logger.getLogger("iumfs");
-    
+
     public ControlDevicePollingThread (String name){
         super(name);
     }
@@ -85,10 +85,13 @@ public abstract class ControlDevicePollingThread extends Thread {
                  */
                 logger.fine("calling " + req.getClass().getSimpleName() + ".execute()");
                 req.execute();
+            } catch (NotADirectoryException ex){                
+                logger.finer(ex.getMessage());                
+                req.setResponseHeader(Request.ENOTDIR, 0);                
             } catch (FileNotFoundException ex) {
                 logger.finer(ex.getMessage());
                 req.setResponseHeader(Request.ENOENT, 0);
-            } catch (FileExistsException ex) {
+            } catch (FileExistException ex) {
                 req.setResponseHeader(Request.EEXIST, 0);
             } catch (IOException ex) {
                 logger.severe(ex.getMessage());
@@ -103,6 +106,7 @@ public abstract class ControlDevicePollingThread extends Thread {
                  * Convert RuntimeException to EIO error.
                  */
                 logger.severe("RuntimeException happened");
+                logger.severe(ex.getMessage());
                 req.setResponseHeader(Request.EIO, 0);
             }
             /*

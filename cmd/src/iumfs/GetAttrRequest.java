@@ -35,7 +35,7 @@ public abstract class GetAttrRequest extends Request {
         /*
          * get File Object
          */
-        File file = getFile();
+        IumfsFile file = getFile();
 
         if (file == null) {
             /*

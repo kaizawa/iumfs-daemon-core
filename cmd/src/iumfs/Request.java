@@ -55,6 +55,7 @@ public abstract class Request {
     final public static int EIO = 5;
     final public static int EEXIST = 17;    
     final public static int ENOTSUP = 48;
+    final public static int ENOTDIR = 2;
     final public static int EINVAL = 22;
 
     private long request_type;
@@ -168,7 +169,7 @@ public abstract class Request {
         wbbuf.putLong(datalen);
     }
 
-    public abstract void execute() throws IOException, FileNotFoundException, UnsupportedEncodingException;
+    abstract public void execute() throws IOException, FileNotFoundException, UnsupportedEncodingException;
 
     /**
      * Get a buffer which has response. Position is set to 0.<br/>
@@ -194,7 +195,7 @@ public abstract class Request {
     public byte[] getData(long from, long to) {
         return Arrays.copyOfRange(data, (int)from, (int)to);
     }
-    abstract public File getFile();
+    abstract public IumfsFile getFile();
 
     /**
      * @return the user

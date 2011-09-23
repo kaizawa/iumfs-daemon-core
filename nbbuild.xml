@@ -71,4 +71,16 @@
     nbproject/build-impl.xml file. 
 
     -->
+    <target name="-post-compile">
+        <copy todir="../iumfs-hdfs/cmd/lib">
+            <fileset dir="dist">
+                <include name="iumfs-daemon-core.jar" />
+            </fileset>        
+        </copy>
+        <copy todir="../iumfs-twitterfs/cmd/lib">
+            <fileset dir="dist">
+                <include name="iumfs-daemon-core.jar" />
+            </fileset>        
+        </copy>        
+    </target>    
 </project>

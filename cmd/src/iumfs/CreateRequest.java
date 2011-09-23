@@ -15,6 +15,8 @@
  */
 package iumfs;
 
+import java.io.IOException;
+
 /**
  * <p>CREATE Request Class</p>
  */
@@ -26,8 +28,8 @@ public abstract class CreateRequest extends Request {
      * </p>
      */
     @Override
-    public void execute() {
-        File file = getFile();
+    public void execute() throws IOException {
+        IumfsFile file = getFile();
         file.create();
         /*
          * レスポンスヘッダをセット
@@ -35,5 +37,5 @@ public abstract class CreateRequest extends Request {
         setResponseHeader(SUCCESS, 0);
     }
 
-    abstract public File getFile();
+    abstract public IumfsFile getFile();
 }
