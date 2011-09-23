@@ -28,6 +28,10 @@ public abstract class WriteRequest extends Request {
     @Override
     public void execute() throws FileNotFoundException, IOException {
         IumfsFile file = getFile();
+        if (file == null) {
+            setResponseHeader(ENOENT, 0);
+            return;
+        }        
         file.write(getData(), getSize(), getOffset());
         /*
          * Set response header
