@@ -28,13 +28,13 @@ import java.util.logging.Logger;
  * </p>
  * TODO: should implement instance pool for better performance?
  */
-public abstract class RequestFactory {
+public class RequestFactory {
 
     protected static final Logger logger = Logger.getLogger("iumfs");
     
     protected RequestFactory(){};
 
-    public Request getInstance(ByteBuffer buf) {
+    public static Request getInstance(ByteBuffer buf) {
         /*
          * Request structure which will be given by control device.
          * 
@@ -135,9 +135,48 @@ public abstract class RequestFactory {
     }
 
     /** 
-     * Create FS dependent Request class.
+     * Create Request instance
      */
-    protected abstract Request createInstance(long request_type);
+    private static Request createInstance(long request_type) {
+        try {
+            Request req = null;
+            switch ((int) request_type) {
+                case Request.READ_REQUEST:
+                    req = new ReadRequest();
+                    break;
+                case Request.READDIR_REQUEST:
+                    req = new ReadDirRequest();
+                    break;
+                case Request.GETATTR_REQUEST:
+                    req = new GetAttrRequest();
+                    break;
+                case Request.WRITE_REQUEST:
+                    req = new WriteRequest();
+                    break;
+                case Request.CREATE_REQUEST:
+                    req = new CreateRequest();
+                    break;
+                case Request.REMOVE_REQUEST:
+                    req = new RemoveRequest();
+                    break;
+                case Request.MKDIR_REQUEST:
+                    req = new MkdirRequest();
+                    break;
+                case Request.RMDIR_REQUEST:
+                    req = new RmdirRequest();
+                    break;
+                default:
+                    logger.warning("Unknown request: " + request_type);
+                    throw new UnknownRequestException();
+            }
+            return req;
+        } catch (BufferUnderflowException ex) {
+            ex.printStackTrace();
+            System.exit(1);
+        } catch (IndexOutOfBoundsException ex) {
+            ex.printStackTrace();
+            System.exit(1);
+        }
+        return null;
+    }
 }
-
-

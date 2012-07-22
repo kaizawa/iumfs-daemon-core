@@ -20,7 +20,7 @@ import java.io.IOException;
 /**
  * <p>CREATE Request Class</p>
  */
-public abstract class CreateRequest extends Request {
+public class CreateRequest extends Request {
 
     /**
      * <p>Excecute FileSystem.create</p>
@@ -36,6 +36,4 @@ public abstract class CreateRequest extends Request {
          */
         setResponseHeader(SUCCESS, 0);
     }
-
-    abstract public IumfsFile getFile();
 }

@@ -15,15 +15,10 @@
  */
 package iumfs;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.FileChannel;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /** 
@@ -31,18 +26,19 @@ import java.util.logging.Logger;
  */
 public abstract class ControlDevicePollingThread extends Thread {
 
-    protected static Logger logger = Logger.getLogger("iumfs");
+    protected static final Logger logger = Logger.getLogger("iumfs");
 
     public ControlDevicePollingThread (String name){
         super(name);
     }
 
+    @Override
     public void run() {
         ByteBuffer rbbuf = ByteBuffer.allocate(Request.DEVICE_BUFFER_SIZE);
         rbbuf.order(ByteOrder.nativeOrder());
         FileInputStream devis = null;
         FileOutputStream devos = null;
-        int len = 0;
+        int len;
         Request req = null;
         RandomAccessFile raf = null;
 
@@ -73,9 +69,9 @@ public abstract class ControlDevicePollingThread extends Thread {
                 /*
                  * Create request object
                  */
-                RequestFactory factory = getFactory();
-                req = factory.getInstance(rbbuf);
-
+                req = RequestFactory.getInstance(rbbuf);
+                setFile(req);
+                
                 if (req == null) {
                     logger.severe("Request object is null");
                     System.exit(1);
@@ -108,7 +104,7 @@ public abstract class ControlDevicePollingThread extends Thread {
                 logger.severe("RuntimeException happened");
                 logger.severe(ex.getMessage());
                 StackTraceElement[] elements = Thread.currentThread().getStackTrace();
-                StringBuffer stacktrace = new StringBuffer();
+                StringBuilder stacktrace = new StringBuilder();
                 for (int i = 0; i < elements.length; i++) {
                     stacktrace.append(elements[i]);
                 }
@@ -128,5 +124,5 @@ public abstract class ControlDevicePollingThread extends Thread {
         }
     }
 
-    protected abstract RequestFactory getFactory();
+    protected abstract void setFile(Request req);
 }

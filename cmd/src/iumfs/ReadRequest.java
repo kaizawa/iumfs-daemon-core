@@ -22,7 +22,7 @@ import java.util.Date;
 /**
  *  READ Request class
  */
-public abstract class ReadRequest extends Request {
+public class ReadRequest extends Request {
 
     /**
      * Read file data and return it to driver with response header
@@ -56,6 +56,4 @@ public abstract class ReadRequest extends Request {
         setResponseHeader(SUCCESS, read_size);
         return;
     }
-
-    abstract public IumfsFile getFile();
 }

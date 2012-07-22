@@ -17,12 +17,11 @@ package iumfs;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
-import java.util.Collection;
 
 /**
  *  READDIR Request class
  */
-public abstract class ReadDirRequest extends Request {
+public class ReadDirRequest extends Request {
 
     /**
      * <p>Read virtual directory entry 

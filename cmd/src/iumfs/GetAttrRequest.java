@@ -16,13 +16,11 @@
 package iumfs;
 
 import java.util.Date;
-import java.util.logging.Level;
-import javax.imageio.stream.FileCacheImageInputStream;
 
 /**
  *  GETATTR request class
  */
-public abstract class GetAttrRequest extends Request {
+public class GetAttrRequest extends Request {
 
     final public static int ATTR_DATA_LEN = 72; // long x 9 フィールド
     private static final long start_time = new Date().getTime();
@@ -37,7 +35,7 @@ public abstract class GetAttrRequest extends Request {
          */
         IumfsFile file = getFile();
 
-        if (file == null) {
+        if (null == file || false == file.exists()) {
             /*
              * Unknown file
              * return ENOENT

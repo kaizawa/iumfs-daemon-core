@@ -15,11 +15,7 @@
  */
 package iumfs;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.io.FileNotFoundException;
-import java.io.FilenameFilter;
-import java.io.IOException;
+import java.io.*;
 import java.net.URI;
 import java.nio.ByteBuffer;
 import java.util.Date;
@@ -204,9 +200,9 @@ abstract public class IumfsFile extends java.io.File {
     @Override
     public String[] list(FilenameFilter filter) {throw new NotSupportedException();}
     @Override
-    public IumfsFile[] listFiles(FileFilter filter) {throw new NotSupportedException();}
+    public File[] listFiles(FileFilter filter) {throw new NotSupportedException();}
     @Override
-    public IumfsFile[] listFiles(FilenameFilter filter) {throw new NotSupportedException();}
+    public File[] listFiles(FilenameFilter filter) {throw new NotSupportedException();}
     public static IumfsFile[] listRoots() {throw new NotSupportedException();}
     @Override
     public boolean mkdirs() {throw new NotSupportedException();}

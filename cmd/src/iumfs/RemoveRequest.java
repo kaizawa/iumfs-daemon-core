@@ -18,7 +18,7 @@ package iumfs;
 /**
  *  REMOVE Request class
  */
-public abstract class RemoveRequest extends Request {
+public class RemoveRequest extends Request {
 
     /**
      * Remove file
@@ -36,7 +36,4 @@ public abstract class RemoveRequest extends Request {
          */
         setResponseHeader(SUCCESS, 0);
     }
-
-    @Override
-    abstract public IumfsFile getFile();
 }

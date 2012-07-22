@@ -21,7 +21,7 @@ import java.io.IOException;
 /**
  * <p>Write Request class</p>
  */
-public abstract class WriteRequest extends Request {
+public class WriteRequest extends Request {
 
     private static final String CONT = "(cont) ";
 

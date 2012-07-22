@@ -16,12 +16,11 @@
 package iumfs;
 
 import java.io.IOException;
-import java.util.Collection;
 
 /**
  * <p>MKDIR Reuqest class</p>
  */
-public abstract class MkdirRequest extends Request {
+public class MkdirRequest extends Request {
 
     /**
      * <p>Create directory.</p>
@@ -41,7 +40,4 @@ public abstract class MkdirRequest extends Request {
          */
         setResponseHeader(SUCCESS, 0);
     }
-
-    @Override
-    abstract public IumfsFile getFile();
 }

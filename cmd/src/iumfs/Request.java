@@ -73,6 +73,7 @@ public abstract class Request {
     private byte[] data;
     private long flags;
     protected static Logger logger = Logger.getLogger("iumfs");
+    private IumfsFile file;
     
     public long getFlags() {
         return flags;
@@ -195,7 +196,14 @@ public abstract class Request {
     public byte[] getData(long from, long to) {
         return Arrays.copyOfRange(data, (int)from, (int)to);
     }
-    abstract public IumfsFile getFile();
+
+    public void setFile(IumfsFile file){
+        this.file = file;
+    }
+    
+    public IumfsFile getFile(){
+        return file;
+    };
 
     /**
      * @return the user

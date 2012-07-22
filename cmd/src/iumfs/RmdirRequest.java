@@ -18,7 +18,7 @@ package iumfs;
 /**
  *  RMDIR request class
  */
-public abstract class RmdirRequest extends Request {
+public class RmdirRequest extends Request {
     /**
      * remove directory
      */
