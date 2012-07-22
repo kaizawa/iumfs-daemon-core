@@ -15,6 +15,6 @@
  */
 package iumfs;
 
-class FileExistException extends RuntimeException {
+public class FileExistException extends RuntimeException {
     
 }

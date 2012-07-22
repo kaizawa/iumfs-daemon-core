@@ -1,7 +1,6 @@
 package iumfs;
 
 import java.util.logging.Formatter;
-import java.util.Calendar;
 import java.util.logging.LogRecord;
 
 public final class SingleLineLogFormatter extends Formatter {
@@ -11,7 +10,7 @@ public final class SingleLineLogFormatter extends Formatter {
      */    
     @Override
     public synchronized String format(final LogRecord rec) {
-        StringBuffer line =  new StringBuffer();
+        StringBuilder line =  new StringBuilder();
         
         line.append(String.format("%tD %<tT.%<tL", rec.getMillis()));
         line.append(" ");

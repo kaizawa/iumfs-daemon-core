@@ -15,7 +15,7 @@
  */
 package iumfs;
 
-class NotADirectoryException extends RuntimeException {
+public class NotADirectoryException extends RuntimeException {
 
     public NotADirectoryException() {
     }
