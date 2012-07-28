@@ -20,8 +20,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.logging.Logger;
 import java.util.Arrays;
+import java.util.logging.Logger;
 
 /**
  * Abstruct class which represents various request from iumfs
@@ -72,7 +72,7 @@ public abstract class Request {
     private long dataoffset;
     private byte[] data;
     private long flags;
-    protected static Logger logger = Logger.getLogger("iumfs");
+    protected static final Logger logger = Logger.getLogger("iumfs");
     private IumfsFile file;
     
     public long getFlags() {

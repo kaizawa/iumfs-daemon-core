@@ -157,6 +157,9 @@ abstract public class IumfsFile extends java.io.File {
     abstract public void create() throws IOException;
     
     @Override
+    abstract public boolean exists() throws SecurityException;
+    
+    @Override
     public boolean isFile() {
         return ! isDirectory();
     }    
@@ -181,8 +184,6 @@ abstract public class IumfsFile extends java.io.File {
     }
     @Override
     public void	deleteOnExit() {throw new NotSupportedException();}
-    @Override
-    public boolean exists(){ throw new NotSupportedException();}
     @Override
     public long getFreeSpace(){ throw new NotSupportedException();}
     @Override
