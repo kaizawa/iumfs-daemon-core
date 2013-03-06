@@ -30,6 +30,10 @@ public class CreateRequest extends Request {
     @Override
     public void execute() throws IOException {
         IumfsFile file = getFile();
+        if (file == null) {
+            setResponseHeader(ENOENT, 0);
+            return;
+        }
         file.create();
         /*
          * レスポンスヘッダをセット
