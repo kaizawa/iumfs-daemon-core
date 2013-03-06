@@ -103,6 +103,7 @@ public abstract class ControlDevicePollingThread extends Thread {
                  */
                 logger.severe("RuntimeException happened");
                 logger.severe(ex.getMessage());
+                ex.printStackTrace();
                 StackTraceElement[] elements = Thread.currentThread().getStackTrace();
                 StringBuilder stacktrace = new StringBuilder();
                 for (int i = 0; i < elements.length; i++) {
