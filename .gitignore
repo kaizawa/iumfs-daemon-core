@@ -2,6 +2,5 @@
 cmd/build
 copy-jar.sh
 build
-dist
 nbproject/private/private.xml
 lib
